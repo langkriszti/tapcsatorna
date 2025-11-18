@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Tápcsatorna feladatok</title>
+<style>
+body { font-family: Arial; background:#eef; padding:20px; }
+h2 { margin-top:40px; }
+.container { background:white; padding:20px; border-radius:10px; width:800px; margin:auto; }
+select, input[type=text] { padding:4px; }
+button { margin:10px 5px; padding:6px 12px; }
+.correct { color:green; }
+.incorrect { color:red; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Tápcsatorna – Online feladatok</h1>
+
+<h2>1. Párosítás</h2>
+<p>Válaszd ki a helyes feladatot minden szervhez.</p>
+<div id="match">
+<table>
+<tr><td>Szájüreg:</td><td>
+<select id="m1">
+<option value="">-- válassz --</option>
+<option>Mechanikai aprítás</option><option>Kémiai bontás</option><option>Víz visszaszívása</option>
+</select></td></tr>
+
+<tr><td>Gyomor:</td><td>
+<select id="m2">
+<option value="">-- válassz --</option>
+<option>Mechanikai aprítás</option><option>Fehérjebontás</option><option>Víz visszaszívása</option>
+</select></td></tr>
+
+<tr><td>Vékonybél:</td><td>
+<select id="m3">
+<option value="">-- válassz --</option>
+<option>Mechanikai aprítás</option><option>Tápanyagok felszívása</option><option>Víz visszaszívása</option>
+</select></td></tr>
+</table>
+<button onclick="checkMatch()">Ellenőrzés</button>
+<button onclick="solMatch()">Megoldás</button>
+<p id="matchResult"></p>
+</div>
+
+<h2>2. Kiegészítés</h2>
+<p>Töltsd ki a hiányzó részeket.</p>
+<p>A <select id="k1">
+<option value="">-- válassz --</option><option>vékonybél</option><option>gyomor</option><option>vastagbél</option>
+</select> feladata a tápanyagok felszívása.</p>
+
+<p>A <select id="k2">
+<option value="">-- válassz --</option><option>szájüreg</option><option>gyomor</option><option>vékonybél</option>
+</select> megkezdi a fehérjék bontását.</p>
+
+<button onclick="checkFill()">Ellenőrzés</button>
+<button onclick="solFill()">Megoldás</button>
+<p id="fillResult"></p>
+
+<h2>3. Igaz – Hamis</h2>
+<p><label><input type="checkbox" id="i1"> A vékonybélben történik a legtöbb felszívás.</label></p>
+<p><label><input type="checkbox" id="i2"> A gyomorban fejeződik be az összes tápanyag lebontása.</label></p>
+
+<button onclick="checkTF()">Ellenőrzés</button>
+<button onclick="solTF()">Megoldás</button>
+<p id="tfResult"></p>
+
+</div>
+
+<script>
+function checkMatch() {
+ let r1 = document.getElementById("m1").value === "Mechanikai aprítás";
+ let r2 = document.getElementById("m2").value === "Fehérjebontás";
+ let r3 = document.getElementById("m3").value === "Tápanyagok felszívása";
+ let msg = "";
+ if (r1 && r2 && r3) msg = "Minden jó! ✔";
+ else msg = "Van hibás megoldás! ✖";
+ document.getElementById("matchResult").innerText = msg;
+}
+function solMatch() {
+ document.getElementById("m1").value = "Mechanikai aprítás";
+ document.getElementById("m2").value = "Fehérjebontás";
+ document.getElementById("m3").value = "Tápanyagok felszívása";
+ document.getElementById("matchResult").innerText = "Megoldások megjelenítve.";
+}
+
+function checkFill() {
+ let r1 = document.getElementById("k1").value === "vékonybél";
+ let r2 = document.getElementById("k2").value === "gyomor";
+ let msg = (r1 && r2) ? "Minden helyes! ✔" : "Van hibás megoldás! ✖";
+ document.getElementById("fillResult").innerText = msg;
+}
+function solFill() {
+ document.getElementById("k1").value = "vékonybél";
+ document.getElementById("k2").value = "gyomor";
+ document.getElementById("fillResult").innerText = "Megoldások megjelenítve.";
+}
+
+function checkTF() {
+ let r1 = document.getElementById("i1").checked === true;
+ let r2 = document.getElementById("i2").checked === false;
+ let msg = (r1 && !r2) ? "Helyes! ✔" : "Hibás! ✖";
+ document.getElementById("tfResult").innerText = msg;
+}
+function solTF() {
+ document.getElementById("i1").checked = true;
+ document.getElementById("i2").checked = false;
+ document.getElementById("tfResult").innerText = "Megoldások megjelenítve.";
+}
+</script>
+
+</body>
+</html>
