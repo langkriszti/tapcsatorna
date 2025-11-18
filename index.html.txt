@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Tápcsatorna feladatok</title>
+<style>
+body { font-family: Arial, sans-serif; background:#eef; padding:20px; }
+h1, h2 { color:#2a4d7a; }
+.container { background:white; padding:20px; border-radius:10px; width:900px; margin:auto; }
+select, input[type=text] { padding:4px; margin:4px 0; }
+button { margin:10px 5px; padding:6px 12px; }
+.result { font-weight:bold; margin-top:10px; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Tápcsatorna – Online feladatok</h1>
+
+<h2>1. Párosítós feladat</h2>
+<p>Válaszd ki, melyik feladat tartozik az egyes részekhez!</p>
+<div>
+Szájüreg: <select id="p1"></select><br>
+Nyelőcső: <select id="p2"></select><br>
+Gyomor: <select id="p3"></select><br>
+Vékonybél: <select id="p4"></select><br>
+Vastagbél: <select id="p5"></select><br>
+Végbél: <select id="p6"></select><br>
+Máj: <select id="p7"></select><br>
+Hasnyálmirigy: <select id="p8"></select><br>
+<button onclick="checkPairs()">Ellenőrzés</button>
+<button onclick="showPairSolutions()">Megoldás</button>
+<p class="result" id="pairResult"></p>
+</div>
+
+<h2>2. Kiegészítős feladat</h2>
+<p>Válaszd ki a helyes szót a legördülő menüből!</p>
+<div>
+1. A tápanyagok mechanikai feldolgozása a 
+<select id="k1">
+<option value="">—</option>
+<option>szájüreg</option><option>gyomor</option><option>vékonybél</option><option>vastagbél</option><option>enzimek</option><option>felszívódás</option>
+</select> történik.<br>
+
+2. A fehérjék emésztése a 
+<select id="k2">
+<option value="">—</option>
+<option>szájüreg</option><option>gyomor</option><option>vékonybél</option><option>vastagbél</option><option>enzimek</option><option>felszívódás</option>
+</select> falában indul meg.<br>
+
+3. A tápanyagok végső 
+<select id="k3">
+<option value="">—</option><option>lebontás</option><option>felszívódás</option><option>enzimek</option>
+</select> a 
+<select id="k4">
+<option value="">—</option><option>szájüreg</option><option>gyomor</option><option>vékonybél</option><option>vastagbél</option>
+</select> szakaszában történik.<br>
+
+4. A víz nagy része a 
+<select id="k5">
+<option value="">—</option><option>szájüreg</option><option>gyomor</option><option>vékonybél</option><option>vastagbél</option>
+</select> falán keresztül szívódik vissza.<br>
+
+5. Az emésztést többféle 
+<select id="k6">
+<option value="">—</option><option>enzimek</option><option>lebontás</option><option>felszívódás</option>
+</select> segíti.<br>
+
+6. A tápanyagok vérbe jutása a 
+<select id="k7">
+<option value="">—</option><option>felszívódás</option><option>lebontás</option><option>enzimek</option>
+</select> folyamata.<br>
+
+<button onclick="checkFill()">Ellenőrzés</button>
+<button onclick="showFillSolutions()">Megoldás</button>
+<p class="result" id="fillResult"></p>
+</div>
+
+<h2>3. Igaz–hamis feladat</h2>
+<p>Írd be: I vagy H</p>
+<div>
+1. A máj egyik feladata az epe termelése. <input id="i1" maxlength="1"><br>
+2. A vastagbélben történik a tápanyagok végső lebontása. <input id="i2" maxlength="1"><br>
+3. A hasnyálmirigy emésztőenzimeket állít elő. <input id="i3" maxlength="1"><br>
+4. A gyomorban megkezdődik a fehérjék emésztése. <input id="i4" maxlength="1"><br>
+5. A nyelőcsőben emésztés zajlik. <input id="i5" maxlength="1"><br>
+6. A vékonybél felülete kicsi. <input id="i6" maxlength="1"><br>
+<button onclick="checkTF()">Ellenőrzés</button>
+<button onclick="showTFSolutions()">Megoldás</button>
+<p class="result" id="tfResult"></p>
+</div>
+
+<script>
+// Párosítás
+const options = {
+A:"Rágás, nyál, emésztés kezdete",
+B:"Végső lebontás és felszívás",
+C:"Víz visszaszívása",
+D:"Salakanyag tárolása",
+E:"Falat továbbítása",
+F:"Fehérjebontás kezdete",
+G:"Epe termelése",
+H:"Emésztőenzimek termelése"
+};
+const correctP={p1:"A",p2:"E",p3:"F",p4:"B",p5:"C",p6:"D",p7:"G",p8:"H"};
+for (const sel of document.querySelectorAll('select')) {for (let k in options){let o=document.createElement('option');o.value=k;o.textContent=options[k];sel.appendChild(o);}}
+function checkPairs(){let s=0;for(let id in correctP){if(document.getElementById(id).value===correctP[id]) s++;}document.getElementById("pairResult").textContent=`Eredmény: ${s}/8`;}
+function showPairSolutions(){for(let id in correctP){document.getElementById(id).value=correctP[id];}document.getElementById("pairResult").textContent="Megoldások megjelenítve.";}
+
+// Kiegészítős
+const correctK={k1:"szájüreg",k2:"gyomor",k3:"lebontás",k4:"vékonybél",k5:"vastagbél",k6:"enzimek",k7:"felszívódás"};
+function checkFill(){let s=0;for(let id in correctK){if(document.getElementById(id).value.toLowerCase().trim()===correctK[id]) s++;}document.getElementById("fillResult").textContent=`Eredmény: ${s}/7`;}
+function showFillSolutions(){for(let id in correctK){document.getElementById(id).value=correctK[id];}document.getElementById("fillResult").textContent="Megoldások megjelenítve.";}
+
+// Igaz–hamis
+const tf={i1:"I",i2:"H",i3:"I",i4:"I",i5:"H",i6:"H"};
+function checkTF(){let s=0;for(let id in tf){if(document.getElementById(id).value.toUpperCase()===tf[id]) s++;}document.getElementById("tfResult").textContent=`Eredmény: ${s}/6`;}
+function showTFSolutions(){for(let id in tf){document.getElementById(id).value=tf[id];}document.getElementById("tfResult").textContent="Megoldások megjelenítve.";}
+
+
+</script>
+</body>
+</html>
